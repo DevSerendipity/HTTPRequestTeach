@@ -19,8 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
     @Bean public SecurityFilterChain websiteFilter(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/file").authenticated().antMatchers("/uploadFile", "/register")
-                .permitAll().and().formLogin().defaultSuccessUrl("/file").loginPage("/login")
-                .failureUrl("/login?error=true").permitAll().and().logout().permitAll();
+                .permitAll().and().formLogin().defaultSuccessUrl("/file").loginPage("/login").failureUrl(
+                        "/login?error=true").permitAll().and().logout().permitAll();
         return http.build();
     }
 
