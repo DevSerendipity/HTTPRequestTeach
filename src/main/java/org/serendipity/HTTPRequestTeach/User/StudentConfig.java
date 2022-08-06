@@ -14,15 +14,17 @@ import java.util.List;
     @Bean CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
         int getLastStudentById = studentRepository.findStudentById();
         fileManagement.addAllEmails();
-        System.out.println("START");
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
         return args -> {
-            Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
             for ( int i = 0; i < 2; i++ ) {
-                studentRepository.saveAll(List.of(new Student(fileManagement.getEmails().get(getLastStudentById + i),
-                                                              argon2PasswordEncoder.encode(fileManagement.getEmails()
-                                                                                                 .get((getLastStudentById
-                                                                                                         + i))))));
+                String lastEmail = getLastEmail(getLastStudentById, i);
+                studentRepository.saveAll(List.of(new Student(lastEmail, argon2PasswordEncoder.encode(lastEmail))));
             }
         };
     }
+
+    private String getLastEmail(int getLastStudentById, int i) {
+        return fileManagement.getEmails().get(getLastStudentById + i);
+    }
+
 }

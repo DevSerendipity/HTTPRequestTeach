@@ -17,9 +17,9 @@ public class FileManagement {
 
     public void addAllEmails() {
         Path path = Paths.get("src/main/resources/mockData/userEmails.csv");
-        try (Stream<String> stream = Files.lines(path)) {
+        try ( Stream<String> stream = Files.lines(path) ) {
             stream.forEach(emails::add);
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             throw new FileSystemNotFoundException("The file could not be found, check the file or adjust the location");
         }
     }
