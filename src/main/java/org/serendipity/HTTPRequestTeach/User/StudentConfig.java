@@ -20,8 +20,8 @@ import java.util.List;
             for ( int i = 0; i < 2; i++ ) {
                 studentRepository.saveAll(List.of(new Student(fileManagement.getEmails().get(getLastStudentById + i),
                                                               argon2PasswordEncoder.encode(fileManagement.getEmails()
-                                                                                                 .get((getLastStudentById
-                                                                                                         + i))))));
+                                                                                                   .get((getLastStudentById
+                                                                                                           + i))))));
             }
         };
     }
